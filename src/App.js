@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import {Helmet} from "react-helmet";
+// import Signup from "./components/Home/Signup";
+// import Login from "./components/Home/Login";
+import Dashboard from "./components/Hero/Dashboard";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+ return(
+  <div>
+  <Helmet>
+    <meta charSet="utf-8" />
+    <title>HATCH</title>
+    <link rel="canonical" href="http://mysite.com/example" />
+    <meta name="description" content="Hatch PM" />
+  </Helmet>
+  {/* <Signup/> */}
+  {/* <Login/> */}
+  <Dashboard/>
+ </div>
+ );
 }
 
 export default App;
