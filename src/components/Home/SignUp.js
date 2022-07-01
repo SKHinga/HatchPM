@@ -1,18 +1,25 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 import Button from '@mui/material/Button';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 function Signup() {
+
+  let navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     alert(`The name you entered was: mine`)
   }
 
+  const handleGo = (e) => {
+    e.preventDefault()
+    navigate("/signin")
+  }
+
   return (
     <div className='login h-screen w-full'>
-      <Link className='p-3'><ArrowBackIcon/></Link>
+      <Link to='/' className='p-3'><ArrowBackIcon/></Link>
       <form onSubmit={handleSubmit} className='h flex flex-column justify-center items-center'>
         <div className='w-5/6 md:w-1/2 h-5/6 md:h-1/2 flex flex-col justify-around'>
           <h2 font-medium text-2xl>Sign Up:</h2>
@@ -29,9 +36,9 @@ function Signup() {
           <input type='password' placeholder='Password' required className='font-normal put'/>
           <input type='password' placeholder='Password' required className='font-normal put'/>
           <div className='flex justify-end'>
-            <Button type='submit' variant="outlined" className='material-button text-end'>Sign Up</Button>
+            <Button type='submit' variant="outlined" className='material-button text-end' onClick={handleGo}>Sign Up</Button>
           </div>
-          <Link className='text-sm font-light text-blue-500 flex justify-end'>Already have an account?</Link>
+          <Link to='/signin' className='text-sm font-light text-blue-500 flex justify-end'>Already have an account?</Link>
         </div>
       </form>
     </div>

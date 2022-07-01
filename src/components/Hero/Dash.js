@@ -11,6 +11,7 @@ function Dash() {
 
   return (
     <div>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mt-3'>
           <div className='bg-white p-3 relative'>
             <div>
               <div className='flex justify-between'>
@@ -25,6 +26,7 @@ function Dash() {
             </div>
             {miniMenu && <Minimenu/>}
           </div>
+      </div>    
     </div>
   )
 }

@@ -3,8 +3,8 @@ import Button from '@mui/material/Button';
 
 function NewProject() {
   return (
-    <div className='h-5/6 mt-5'>
-      <form className='flex flex-col justify-between h-full'>
+    <div className='h-full md:h-5/6 mt-5'>
+      <form className='flex flex-col justify-around md:justify-between h-full'>
         <input type='text' placeholder='Project name*' required className='font-normal put w-full'/>
         <input type='text' placeholder='Project scope*' required className='font-normal put w-full'/>
         <div className='flex flex-col'>

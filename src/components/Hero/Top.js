@@ -10,7 +10,7 @@ function Top() {
         <div className='col-span-10'>
           <div className='flex justify-between py-1'>
             <h1 className='orange font-bold text-2xl'>Hatch.</h1>
-            <Link><Button variant='outlined' className='material-button text-end'>Log Out</Button></Link>
+            <Link to='/'><Button variant='outlined' className='material-button text-end'>Log Out</Button></Link>
           </div>
         </div>
         <div className=''></div>
