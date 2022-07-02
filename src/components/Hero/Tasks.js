@@ -3,7 +3,7 @@ import React from 'react'
 function Tasks() {
   return (
     <div>
-      Tasks
+      <h1 className='cal'>Tasks</h1>
     </div>
   )
 }

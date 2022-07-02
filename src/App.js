@@ -1,10 +1,14 @@
 import React from "react";
 import {Helmet} from "react-helmet";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate} from "react-router-dom";
 import Dashboard from "./components/Hero/Dashboard";
 import Hero from "./components/Home/Hero";
 import LogIn from "./components/Home/LogIn";
 import Signup from "./components/Home/SignUp";
+import Dash from "./components/Hero/Dash"
+import Calender from './components/Hero/Calender';
+import NewProject from './components/Hero/NewProject';
+import Tasks from './components/Hero/Tasks';
 
 
 function App() {
@@ -18,10 +22,16 @@ function App() {
   </Helmet>
 
   <Routes>
-    <Route path="signin/dashboard" element={<Dashboard/>}/>
+    <Route path="/1/dashboard/*" element={<Dashboard/>}>
+      <Route index element={<Navigate to="projects" replace />} />
+      <Route path='calendar' element={<Calender/>}/>
+      <Route path='new-project/*' element={<NewProject/>}/>
+      <Route path=':projectId/tasks' element={<Tasks/>}/>
+      <Route index path='projects' element={<Dash/>}/>
+    </Route>
     <Route path="signin" element={<LogIn/>}/>
     <Route path="signin/signup" element={<Signup/>}/>
-    <Route path="/*" element={<Hero/>}/>
+    <Route index path="/" element={<Hero/>}/>
   </Routes>
  
 

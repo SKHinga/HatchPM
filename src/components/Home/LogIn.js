@@ -13,7 +13,7 @@ const LogIn = () => {
 
   const handleCome = (e) => {
    e.preventDefault()
-   navigate("/signin/dashboard")
+   navigate("/1/dashboard")
   }
 
   return (

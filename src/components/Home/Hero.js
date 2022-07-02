@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink, Route } from 'react-router-dom';
+import { NavLink} from 'react-router-dom';
 import Button from '@mui/material/Button';
 
 function Hero() {
