@@ -22,7 +22,7 @@ function App() {
   </Helmet>
 
   <Routes>
-    <Route path="/1/dashboard/*" element={<Dashboard/>}>
+    <Route path="dashboard/*" element={<Dashboard/>}>
       <Route index element={<Navigate to="projects" replace />} />
       <Route path='calendar' element={<Calender/>}/>
       <Route path='new-project/*' element={<NewProject/>}/>
@@ -30,7 +30,7 @@ function App() {
       <Route index path='projects' element={<Dash/>}/>
     </Route>
     <Route path="signin" element={<LogIn/>}/>
-    <Route path="signin/signup" element={<Signup/>}/>
+    <Route path="signup" element={<Signup/>}/>
     <Route index path="/" element={<Hero/>}/>
   </Routes>
  

@@ -102,6 +102,10 @@ html {
   font-size: 12px;
 }
 
+.boarder {
+  border-bottom: 1px solid var(--bold-color);
+}
+
 @media (min-width: 768px) {
   .haba {
     height: 90vh;
