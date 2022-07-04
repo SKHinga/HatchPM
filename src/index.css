@@ -106,8 +106,58 @@ html {
   border-bottom: 1px solid var(--bold-color);
 }
 
+.hamburger {
+  display: none;
+  cursor: pointer;
+  margin-top: 3px;
+  padding-right: 10px;
+}
+.barr {
+  display: block;
+  width: 20px;
+  height: 3px;
+  margin: 5px auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--secondary-color);
+}
+
 @media (min-width: 768px) {
   .haba {
     height: 90vh;
   }
+}
+
+@media screen and (min-width: 320px) and (max-width: 480px) {
+  .hamburger {
+    display: block;
+  }
+  
+ .bar {
+  position: fixed;
+  right: -50%;
+  padding: 5px;
+  padding-left: 7px;
+  top: 40px;
+  gap: 0;
+  flex-direction: column;
+  background-color: rgba(234, 88, 41, .5);
+  width: 40%;
+  transition: 0.3s;
+  z-index: 1;
+ }
+
+ .activebar {
+  position: fixed;
+  right: 0%;
+  padding: 5px;
+  padding-left: 7px;
+  top: 40px;
+  gap: 0;
+  flex-direction: column;
+  background-color: rgba(234, 88, 41, .5);
+  width: 40%;
+  transition: 0.3s;
+  z-index: 1;
+}
 }
