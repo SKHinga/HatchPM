@@ -14,7 +14,7 @@ function Svg() {
         <p className='gress md:mt-5 text-xl p-3 md:p-0'>Your one stop shop to manage any basic or<br></br> complex projects.</p>
       </div>
       <div className='col-span-10 md:col-span-5'>
-        <img src={svg}/>
+        <img src={svg} alt='Logo'/>
       </div>
       <div className='hidden md:contents'><div></div></div>
     </div>
