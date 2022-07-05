@@ -122,6 +122,10 @@ html {
   background-color: var(--secondary-color);
 }
 
+.topper {
+  border-top: solid 1px var(--bold-color);
+}
+
 @media (min-width: 768px) {
   .haba {
     height: 90vh;
@@ -141,7 +145,7 @@ html {
   top: 40px;
   gap: 0;
   flex-direction: column;
-  background-color: rgba(234, 88, 41, .5);
+  background-color: rgba(234, 88, 41);
   width: 40%;
   transition: 0.3s;
   z-index: 1;
@@ -155,7 +159,7 @@ html {
   top: 40px;
   gap: 0;
   flex-direction: column;
-  background-color: rgba(234, 88, 41, .5);
+  background-color: rgba(234, 88, 41);
   width: 40%;
   transition: 0.3s;
   z-index: 1;

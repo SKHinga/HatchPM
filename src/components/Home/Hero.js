@@ -1,42 +1,24 @@
-import React, {useState} from 'react'
-import { NavLink} from 'react-router-dom';
-import Button from '@mui/material/Button';
+import React from 'react'
+import About from './About';
+import Botom from './Botom';
+import Contact from './Contact';
+import Features from './Features';
+import Footer from './Footer';
+import NavBar from './NavBar';
+import Svg from './Svg';
 
 function Hero() {
-  const [toggl, setToggl] = useState(false);
-
-  const handleNew = () => {
-    console.log("now");
-  }
-
-  const handleToggle = () => {
-    setToggl(!toggl)
-  }
 
 
   return (
-    <div className='login h-screen'>
-        <div className='grid grid-cols-10 md:grid-cols-12'>
-          <div className='hidden md:contents'><div></div></div>
-          <div className='col-span-10 md:col-span-10'>
-            <div className='flex justify-between py-1'>
-              <h1 className='orange font-bold text-2xl'>Hatch.</h1>
-              <div className='flex justify-between md:w-80 mt-11 md:mt-1 gress bar'>
-                <NavLink to='/'>Home</NavLink>
-                <NavLink to='/'>Features</NavLink>
-                <NavLink to='/'>About Us</NavLink>
-                <NavLink to='/'>Contact</NavLink>
-              </div>
-              <NavLink to='signin' className={toggl?'activebar':'bar'}><Button variant='outlined' className='material-button text-end' onClick={handleNew}>Log In</Button></NavLink>
-              <div className='hamburger' onClick={handleToggle}>
-                <span className='barr'></span>
-                <span className='barr'></span>
-                <span className='barr'></span>
-              </div>
-            </div>
-          </div>
-          <div className='hidden md:contents'><div></div></div>
-        </div>
+    <div className='login min-h-screen'>
+      <NavBar/>
+      <Svg/>
+      <Features/>
+      <About/>
+      <Contact/>
+      <Footer/>
+      <Botom/>
     </div>
   )
 }
