@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# Hatch PM front-end
+
+## Back-end link
+
+-[Back-end](https://github.com/SKHinga/phase-3-sinatra-react-project)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
