@@ -1,27 +1,19 @@
-import React, {useEffect, useState} from 'react'
+import React, {useContext, useState} from 'react'
 import Minimenu from './Minimenu';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import useUser from '../../hooks/useUser';
+import { Projects } from '../../Helper/Context';
 
 function Dash() {
   const [miniMenu, setMiniMenu] = useState(false);
-  const user = useUser();
-  const [onProjects, setOnProjects] = useState();
-  useEffect(()=>{
-    const collect = async() => {
-      const response = await fetch(`https://hatch-pm.herokuapp.com/users/${user.userId}`);
-      const users = await response.json();
-      setOnProjects(users.projects)
-    }
-    collect();
-  }, [user])
+  const {itemsToDisplay} = useContext(Projects);
+  
 
   const handleMiniMenu = (index) => {
     setMiniMenu(miniMenu=>!miniMenu);  
   }
 
 
-  const data = onProjects?.map((proj, index) =>(
+  const data = itemsToDisplay?.map((proj, index) =>(
     <div className='bg-white p-3 relative' key={proj.id}>
       <div>
         <div className='flex justify-between'>

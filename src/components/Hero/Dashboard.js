@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { NavLink, Outlet} from 'react-router-dom';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
@@ -9,9 +9,37 @@ import Top from './Top';
 import Filter from './Filter';
 import useUser from '../../hooks/useUser';
 
+import { Projects } from '../../Helper/Context';
+
 function Dashboard() {
 
   const user = useUser();
+  const [search, setFinder] = useState("")
+  const [onProjects, setOnProjects] = useState();
+  useEffect(()=>{
+    const collect = async() => {
+      const response = await fetch(`https://hatch-pm.herokuapp.com/users/${user.userId}`);
+      const users = await response.json();
+      setOnProjects(users.projects)
+    }
+    collect();
+  }, [user])
+
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  function handleCategoryChange(event) {
+    setSelectedCategory(event.target.value);
+  }
+
+  function onSearchChange(e){
+    setFinder(e.target.value);
+  }
+
+  const itemsToDisplay = onProjects?.filter((proj) => {
+    if (selectedCategory === "All") return true;
+
+    return proj.progress === selectedCategory;
+  }).filter((proj) => proj.project_name.includes(search));
 
   // let navigate = useNavigate();
 
@@ -23,7 +51,7 @@ function Dashboard() {
     color: "#EA5829",
   }
   return (
-    <div className='login min-h-screen'>
+    <Projects.Provider value={{handleCategoryChange, itemsToDisplay}} className='login min-h-screen'>
       <Top/>
       <div className='grid grid-cols-12'>
         <div></div>
@@ -48,7 +76,7 @@ function Dashboard() {
           <div className='grid grid-cols-6 md:grid-cols-4 items-center'>
             <div className='col-span-4 md:col-span-3'>
               <div className='cave flex md:justify-between items-center'>
-                <input type='text' placeholder='Search' className='font-normal put w-full md:24'/>
+                <input value={search} onChange={onSearchChange} type='text' placeholder='Search' className='font-normal put w-full md:24'/>
                 <SearchIcon/>
               </div>
             </div>
@@ -67,7 +95,7 @@ function Dashboard() {
         </div>
         <div></div>
       </div>
-    </div>
+    </Projects.Provider>
   )
 }
 
