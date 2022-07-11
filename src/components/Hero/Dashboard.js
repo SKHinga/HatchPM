@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { NavLink, Outlet} from 'react-router-dom';
+import { NavLink, Outlet, useNavigate} from 'react-router-dom';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PersonIcon from '@mui/icons-material/Person';
@@ -14,6 +14,7 @@ import { Projects } from '../../Helper/Context';
 function Dashboard() {
 
   const user = useUser();
+  let navigate = useNavigate();
   const [search, setFinder] = useState("")
   const [onProjects, setOnProjects] = useState();
   useEffect(()=>{
@@ -33,6 +34,7 @@ function Dashboard() {
 
   function onSearchChange(e){
     setFinder(e.target.value);
+    navigate ("../dashboard");
   }
 
   const itemsToDisplay = onProjects?.filter((proj) => {
