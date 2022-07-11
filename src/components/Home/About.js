@@ -4,7 +4,7 @@ const logos = require('../assets/Logos.png')
 
 function About() {
   return (
-    <div className='grid grid-cols-10 md:grid-cols-12 mt-3'>
+    <div id='about' className='grid grid-cols-10 md:grid-cols-12 mt-3'>
       <div className='hidden md:contents'><div></div></div>
       <div className='col-span-10 md:col-span-10'>
         <h2 className='font-bold cal text-xl text-center'>About Us</h2>

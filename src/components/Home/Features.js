@@ -8,7 +8,7 @@ import EmojiObjectsIcon from '@mui/icons-material/EmojiObjects';
 
 function Features() {
   return (
-    <div className='grid grid-cols-10 md:grid-cols-12'>
+    <div id='features' className='grid grid-cols-10 md:grid-cols-12'>
        <div className='hidden md:contents'><div></div></div>
        <div className='col-span-10 md:col-span-10'>
         <h2 className='font-bold cal text-xl text-center'>Best <span className='orange'>Features</span> for your<br></br> projects</h2>

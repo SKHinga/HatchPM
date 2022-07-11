@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 
 function Contact() {
   return (
-    <div>
+    <div id='contact'>
       <h2 className='font-bold cal text-xl text-center'>Contact Us</h2>
       <div id='contact' className='grid grid-cols-10 md:grid-cols-12 mb-2'>
         <div className='hidden md:contents'><div></div></div>
