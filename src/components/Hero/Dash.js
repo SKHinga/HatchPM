@@ -6,9 +6,11 @@ import { Projects } from '../../Helper/Context';
 function Dash() {
   const [miniMenu, setMiniMenu] = useState(false);
   const {itemsToDisplay} = useContext(Projects);
+  const {deleteProj} = useContext(Projects);
+
   
 
-  const handleMiniMenu = (index) => {
+  const handleMiniMenu = (id) => {
     setMiniMenu(miniMenu=>!miniMenu);  
   }
 
@@ -26,7 +28,7 @@ function Dash() {
         <h4 className='gress'>Description:</h4>
         <p className='text-sm'>{proj.description}</p>
       </div>
-      {miniMenu && <Minimenu/>}
+      {miniMenu && <Minimenu handleDelete={deleteProj(proj.id)}/>}
     </div>
     )
   )

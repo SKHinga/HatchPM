@@ -32,9 +32,22 @@ function Dashboard() {
     setSelectedCategory(event.target.value);
   }
 
+  function handleAdd (data){
+    setOnProjects([...onProjects, data])
+  }
+
   function onSearchChange(e){
     setFinder(e.target.value);
     navigate ("../dashboard");
+  }
+
+  const deleteProj = id => {
+    fetch(`https://hatch-pm.herokuapp.com/projects/${id}`, {
+      method: 'DELETE'
+    }).then(()=>{
+      const removed = onProjects.filter(did => did.id !== id);
+      setOnProjects(removed);
+    })
   }
 
   const itemsToDisplay = onProjects?.filter((proj) => {
@@ -53,7 +66,7 @@ function Dashboard() {
     color: "#EA5829",
   }
   return (
-    <Projects.Provider value={{handleCategoryChange, itemsToDisplay}}>
+    <Projects.Provider value={{handleCategoryChange, itemsToDisplay, deleteProj, handleAdd}}>
       <div className='login min-h-screen'>
         <Top/>
         <div className='grid grid-cols-12'>

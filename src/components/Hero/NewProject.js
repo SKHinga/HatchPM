@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import useUser from '../../hooks/useUser';
+import { Projects } from '../../Helper/Context';
 
 function NewProject() {
   let navigate = useNavigate();
+  const {handleAdd} = useContext(Projects);
   const user = useUser();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -15,6 +17,7 @@ function NewProject() {
     progress: "In progress",
     user_id: user.userId,
   });
+
 
   function handleChange(event) {
     setFormData({
@@ -32,9 +35,12 @@ function NewProject() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
-    });
+    })
+    .then((r)=>r.json())
+    .then((newProj) => handleAdd(newProj));
+
     navigate("/dashboard");
-    setFormData("")
+    // setFormData("")
   }
 
 
