@@ -4,16 +4,48 @@ import { Projects } from '../../Helper/Context';
 
 function Tasks() {
 
-  const [task, setTask] = useState(false);
-  const {projId, tasked} = useContext(Projects);
+  const {projId, tasked, handleNewTask, taskSelf} = useContext(Projects);
+  const [taskData, setTaskData] = useState({
+    task_name: "",
+    project_id: projId,
+    check: "0"
+  });
 
-  const handleAddTask = (e) => {
-    e.preventDefault();
-    setTask(task => !task)
-    console.log(projId);
+
+  const changeDone = (event) => {
+    setTaskData({
+      ...taskData,
+      [event.target.id]: event.target.value,
+    })
   }
 
-  let checker = "checked"
+  const newTask = (event) => {
+    event.preventDefault();
+      fetch("https://hatch-pm.herokuapp.com/tasks", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(taskData),
+    })
+    .then((r)=>r.json())
+    .then((newProji) => handleNewTask(newProji));
+    setTaskData({
+      task_name: "",
+      project_id: projId,
+      check: "0"
+    });
+  }
+
+  const lists = taskSelf?.map((done) => (
+    <div key={done.id} >
+      <label htmlFor={done.id} className='gress text-sm'>
+        <input type='checkbox' id={done.id} className='mr-1' defaultChecked={done.check? true : false}/>
+        {done.task_name}
+      </label>
+  </div>
+  ))
+
 
   const entry = tasked?.map((thing) => (
     <div key={thing.id}>
@@ -22,20 +54,13 @@ function Tasks() {
         <p className='text-sm text-center'>{thing.description}</p>
         <p className='text-sm text-center cal'>Deadline: {thing.deadline}</p>
       </div>
-      <form>
-        {task && <input type='text' placeholder='Task*' required className='font-normal put w-full'/>}
+      <form onSubmit={newTask}>
+        <input onChange={changeDone} id='task_name' value={taskData.task_name} type='text' placeholder='Task*' required className='font-normal put w-full'/>
         <div className='flex justify-end mt-2'>
-          <Button type='submit' variant="outlined" className='material-button text-end' onClick={handleAddTask}>{task? "Add" : "Add Task"}</Button>
+          <Button type='submit' variant="outlined" className='material-button text-end'>Add Task</Button>
         </div>
       </form>
-      {thing.tasks?.map((done) => (
-        <div>
-          <label key={done.id} htmlFor={done.id} className='gress text-sm'>
-            <input type='checkbox' id={done.id} className='mr-1' {...done.check?checker:null}/>
-            {done.task_name}
-          </label>
-      </div>
-      ))}
+      {lists}
     </div>
   ))
   
@@ -43,7 +68,6 @@ function Tasks() {
   return (
     <div>
       {entry}
-      {console.log(tasked)}
     </div>
   )
 }

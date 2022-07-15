@@ -19,6 +19,7 @@ function Dashboard() {
   const [projId, setProjId] = useState();
   const [tasked, setTasked] = useState([]);
   const [onProjects, setOnProjects] = useState();
+  const [taskSelf, setTaskSelf] = useState();
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   useEffect(()=>{
@@ -35,10 +36,15 @@ function Dashboard() {
       const response = await fetch(`https://hatch-pm.herokuapp.com/projects/${id}`);
       const projectTasks = await response.json();
       setTasked([projectTasks])
+      setTaskSelf(projectTasks.tasks)
     }
     toDo();
     navigate('tasks')
     setProjId(id);
+  }
+
+  function handleNewTask (data){
+    setTaskSelf([...taskSelf, data])
   }
 
   function handleCategoryChange(event) {
@@ -80,7 +86,7 @@ function Dashboard() {
     color: "#EA5829",
   }
   return (
-    <Projects.Provider value={{handleCategoryChange, itemsToDisplay, deleteProj, handleAdd, projId, pickId, tasked}}>
+    <Projects.Provider value={{handleCategoryChange, itemsToDisplay, deleteProj, handleAdd, projId, pickId, tasked, handleNewTask, taskSelf}}>
       <div className='login min-h-screen'>
         <Top/>
         <div className='grid grid-cols-12'>
