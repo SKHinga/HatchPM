@@ -15,8 +15,12 @@ function Dashboard() {
 
   const user = useUser();
   let navigate = useNavigate();
-  const [search, setFinder] = useState("")
+  const [search, setFinder] = useState("");
+  const [projId, setProjId] = useState();
+  const [tasked, setTasked] = useState([]);
   const [onProjects, setOnProjects] = useState();
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
   useEffect(()=>{
     const collect = async() => {
       const response = await fetch(`https://hatch-pm.herokuapp.com/users/${user.userId}`);
@@ -26,7 +30,16 @@ function Dashboard() {
     collect();
   }, [user])
 
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const  pickId = (id) => {
+    const toDo = async() => {
+      const response = await fetch(`https://hatch-pm.herokuapp.com/projects/${id}`);
+      const projectTasks = await response.json();
+      setTasked([projectTasks])
+    }
+    toDo();
+    navigate('tasks')
+    setProjId(id);
+  }
 
   function handleCategoryChange(event) {
     setSelectedCategory(event.target.value);
@@ -42,6 +55,7 @@ function Dashboard() {
   }
 
   const deleteProj = id => {
+    alert("Please note, you are proceeding to delete this project!")
     fetch(`https://hatch-pm.herokuapp.com/projects/${id}`, {
       method: 'DELETE'
     }).then(()=>{
@@ -66,7 +80,7 @@ function Dashboard() {
     color: "#EA5829",
   }
   return (
-    <Projects.Provider value={{handleCategoryChange, itemsToDisplay, deleteProj, handleAdd}}>
+    <Projects.Provider value={{handleCategoryChange, itemsToDisplay, deleteProj, handleAdd, projId, pickId, tasked}}>
       <div className='login min-h-screen'>
         <Top/>
         <div className='grid grid-cols-12'>

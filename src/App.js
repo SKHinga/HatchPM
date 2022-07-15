@@ -26,7 +26,7 @@ function App() {
       <Route index element={<Navigate to="projects" replace />} />
       <Route path='calendar' element={<Calender/>}/>
       <Route path='new-project/*' element={<NewProject/>}/>
-      <Route path=':projectId/tasks' element={<Tasks/>}/>
+      <Route path='tasks' element={<Tasks/>}/>
       <Route index path='projects' element={<Dash/>}/>
     </Route>
     <Route path="signin" element={<LogIn/>}/>
