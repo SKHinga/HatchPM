@@ -20,23 +20,28 @@ function Dashboard() {
   const [tasked, setTasked] = useState([]);
   const [onProjects, setOnProjects] = useState();
   const [taskSelf, setTaskSelf] = useState();
+  const [isLoading, setisLoading] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   useEffect(()=>{
+    setisLoading(true)
     const collect = async() => {
       const response = await fetch(`https://hatch-pm.herokuapp.com/users/${user.userId}`);
       const users = await response.json();
       setOnProjects(users.projects)
+      setisLoading(false)
     }
     collect();
   }, [user])
 
   const  pickId = (id) => {
+    setisLoading(true)
     const toDo = async() => {
       const response = await fetch(`https://hatch-pm.herokuapp.com/projects/${id}`);
       const projectTasks = await response.json();
       setTasked([projectTasks])
       setTaskSelf(projectTasks.tasks)
+      setisLoading(false)
     }
     toDo();
     navigate('tasks')
@@ -113,7 +118,7 @@ function Dashboard() {
             </div>
             <div className='flex cal'><PersonIcon/><p>{user.first_name}</p></div>
           </div>
-          <div className='col-span-12 md:col-span-6 mt-3 md:mt-0 overflow-y-scroll higher'>
+          <div className='col-span-12 relative md:col-span-6 mt-3 md:mt-0 overflow-y-scroll higher'>
             <div className='grid grid-cols-6 md:grid-cols-4 items-center'>
               <div className='col-span-4 md:col-span-3'>
                 <div className='cave flex md:justify-between items-center'>
@@ -129,7 +134,16 @@ function Dashboard() {
             </div>
 
             {/* Center piece */}
-            <Outlet/>
+            {isLoading ? (
+            <div className='absolute w-full h-full flex flex-column justify-center items-center'>
+              <div class="lds-roller">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </div>) : <Outlet/>}
           </div>
           <div className='hidden md:flex col-span-2'>
             <Filter/>

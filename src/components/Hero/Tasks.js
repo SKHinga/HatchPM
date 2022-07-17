@@ -73,7 +73,7 @@ function Tasks() {
   const entry = tasked?.map((thing, index) => (
     <div key={thing.id}>
       <div key={index} className='boarder p-3 mb-3'>
-        <h2 className='text-center cal font-bold text-xl'>Projects: <em className='orange'>{thing.project_name}</em></h2>
+        <h2 className='text-center cal font-bold text-xl'>Project: <em className='orange'>{thing.project_name}</em></h2>
         <p className='text-sm text-center'>{thing.description}</p>
         <p className='text-sm text-center cal'>Deadline: {thing.deadline}</p>
       </div>
