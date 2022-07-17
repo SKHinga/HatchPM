@@ -11,7 +11,7 @@ function Filter() {
   return (
     <div>
       <div className='flex h-24 items-end'>
-        <label htmlFor='select' className='cal'>
+        <label htmlFor='select' className='cal ml-2'>
           Filter
           <select id='select' onChange={handleCategoryChange} className='font-normal put md:w-36 ml-1'>
             <option value='All'>All</option>

@@ -47,6 +47,17 @@ function Dashboard() {
     setTaskSelf([...taskSelf, data])
   }
 
+  function handleBoolean (data){
+    const checkMate = taskSelf.map(mate => {
+      if (mate.id === data.id){
+        return data;
+      } else {
+        return mate;
+      }
+    });
+    setTaskSelf(checkMate);
+  }
+
   function handleCategoryChange(event) {
     setSelectedCategory(event.target.value);
   }
@@ -75,19 +86,13 @@ function Dashboard() {
 
     return proj.progress === selectedCategory;
   }).filter((proj) => proj.project_name.includes(search));
-
-  // let navigate = useNavigate();
-
-  // const handleCalendar = () => {
-  //   navigate("./calendar", { replace: true })
-  // };
   
   let activeStyle = {
     color: "#EA5829",
   }
   return (
-    <Projects.Provider value={{handleCategoryChange, itemsToDisplay, deleteProj, handleAdd, projId, pickId, tasked, handleNewTask, taskSelf}}>
-      <div className='login min-h-screen'>
+    <Projects.Provider value={{handleCategoryChange, itemsToDisplay, deleteProj, handleAdd, projId, pickId, tasked, handleNewTask, taskSelf, handleBoolean}}>
+      <div className='login h-screen overflow-hidden'>
         <Top/>
         <div className='grid grid-cols-12'>
           <div></div>
@@ -108,7 +113,7 @@ function Dashboard() {
             </div>
             <div className='flex cal'><PersonIcon/><p>{user.first_name}</p></div>
           </div>
-          <div className='col-span-12 md:col-span-6 mt-3 md:mt-0'>
+          <div className='col-span-12 md:col-span-6 mt-3 md:mt-0 overflow-y-scroll higher'>
             <div className='grid grid-cols-6 md:grid-cols-4 items-center'>
               <div className='col-span-4 md:col-span-3'>
                 <div className='cave flex md:justify-between items-center'>

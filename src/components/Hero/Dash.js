@@ -14,6 +14,7 @@ function Dash() {
       <div>
         <div className='flex justify-between'>
           <h3 className='cal font-bold'>{proj.project_name}</h3>
+          <p>⛓️</p>
         </div>
         <p className='orange'>{proj.progress}</p>
         <h4 className='gress'>Project Scope:</h4>

@@ -126,6 +126,16 @@ html {
   border-top: solid 1px var(--bold-color);
 }
 
+.higher {
+  height: 90vh !important;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.higher::-webkit-scrollbar {
+  display: none;
+}
+
 @media (min-width: 768px) {
   .haba {
     height: 90vh;
