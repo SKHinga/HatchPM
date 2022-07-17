@@ -63,6 +63,18 @@ function Dashboard() {
     setTaskSelf(checkMate);
   }
 
+  function handlePrors(data){
+    const newProcess = onProjects.map(prob => {
+      if (prob.id === data.id){
+        return data;
+      } else {
+        return prob;
+      }
+    });
+
+    setOnProjects(newProcess);
+  }
+
   function handleCategoryChange(event) {
     setSelectedCategory(event.target.value);
   }
@@ -90,13 +102,13 @@ function Dashboard() {
     if (selectedCategory === "All") return true;
 
     return proj.progress === selectedCategory;
-  }).filter((proj) => proj.project_name.includes(search));
+  }).filter((proj) => proj.project_name?.includes(search));
   
   let activeStyle = {
     color: "#EA5829",
   }
   return (
-    <Projects.Provider value={{handleCategoryChange, itemsToDisplay, deleteProj, handleAdd, projId, pickId, tasked, handleNewTask, taskSelf, handleBoolean}}>
+    <Projects.Provider value={{handleCategoryChange, itemsToDisplay, deleteProj, handleAdd, projId, pickId, tasked, handleNewTask, taskSelf, handleBoolean, handlePrors}}>
       <div className='login h-screen overflow-hidden'>
         <Top/>
         <div className='grid grid-cols-12'>
@@ -136,7 +148,7 @@ function Dashboard() {
             {/* Center piece */}
             {isLoading ? (
             <div className='absolute w-full h-full flex flex-column justify-center items-center'>
-              <div class="lds-roller">
+              <div className="lds-roller">
                 <div></div>
                 <div></div>
                 <div></div>

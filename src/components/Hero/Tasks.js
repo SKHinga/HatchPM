@@ -4,9 +4,11 @@ import { Projects } from '../../Helper/Context';
 
 function Tasks() {
 
-  const {projId, tasked, handleNewTask, taskSelf, handleBoolean} = useContext(Projects);
+  const {projId, tasked, handleNewTask, taskSelf, handleBoolean, handlePrors} = useContext(Projects);
   const [checking, setChecking] = useState();
+  const [isView, setIsView] = useState(false);
   const [dent, setDent] = useState();
+  const [proceed, setproceed] = useState();
   const [taskData, setTaskData] = useState({
     task_name: "",
     project_id: projId,
@@ -58,6 +60,26 @@ function Tasks() {
       
   // }
 
+  const handleView = () => {
+    setIsView(isView => !isView)
+  }
+
+  const handleProgress = (e) => {
+    e.preventDefault();
+    fetch(`https://hatch-pm.herokuapp.com/projects/${projId}`,{
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          progress: proceed
+        })
+      }) 
+      .then(r=> r.json())
+      .then(niceItem => handlePrors(niceItem))
+      setIsView(false);
+  }
+
 
 
   const lists = taskSelf?.map((done) => (
@@ -77,12 +99,32 @@ function Tasks() {
         <p className='text-sm text-center'>{thing.description}</p>
         <p className='text-sm text-center cal'>Deadline: {thing.deadline}</p>
       </div>
-      <form key={thing.project_name} onSubmit={newTask}>
-        <input onChange={changeDone} id='task_name' value={taskData.task_name} type='text' placeholder='Task*' required className='font-normal put w-full'/>
-        <div className='flex justify-end mt-2'>
-          <Button type='submit' variant="outlined" className='material-button text-end'>Add Task</Button>
+      {isView && (
+        <div>
+          <form onSubmit={handleProgress} className='flex w-full justify-between my-2'>
+            <label htmlFor='progress' className='text-sm'>
+              Pregress:
+              <select onChange={(e)=>setproceed(e.target.value)} id='progress' className='ml-2 settle'>
+                <option value=''>Select</option>
+                <option value='In progress'>In progress</option>
+                <option value='Complete'>Complete</option>
+              </select>
+            </label>
+            <div>
+              <Button type='submit' variant="outlined" className='mater-button'>Set</Button>
+            </div>
+          </form>
+          <form key={thing.project_name} onSubmit={newTask}>
+            <input onChange={changeDone} id='task_name' value={taskData.task_name} type='text' placeholder='Task*' required className='font-normal put w-full'/>
+            <div className='flex justify-start mt-2'>
+              <Button type='submit' variant="outlined" className='material-button text-end'>Add Task</Button>
+            </div>
+          </form>
         </div>
-      </form>
+      )}
+      <div className='flex justify-end mt-2'>
+        <Button onClick={()=>handleView()} variant="outlined" className='material-button text-end'>{isView ? 'Done' : 'More'}</Button>
+      </div>
     </div>
   ))
   
